@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="~/Content/ui-grid.min.css" rel="stylesheet" />
+    <title>_BlankLayout</title>
+</head>
+<body ng-app="App">
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @*Others*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/ui-grid.min.js"></script>
+    @*Model*@
+    <script src="~/Scripts/Model/App.js"></script>
+
+    @*Controllers*@
+    <script src="~/Scripts/Controllers/login.controller.js"></script>
+
+    @*Services*@
+    <script src="~/Scripts/Services/login.service.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿@model CompanyManagement.ViewModel.UserViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container" ng-controller="LoginController">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign In</h3>
+                </div>
+                <div class="card-body">
+                    <form name="loginForm" ng-submit="Login()" novalidate>
+                        <div class="input-group form-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+
+                        <div class="input-group form-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Password" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                        <span class="text-danger">@ViewBag.Message</span>
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@*@using (Html.BeginForm())
+    {
+        <div ng-controller="LoginController">
+            <div class="container-fluid">
+                <div class="panel panel-success">
+                    <div class="panel-heading">Login</div>
+                    <div class="panel-body panelBox">
+                        <form name="loginForm" ng-submit="Login()" novalidate>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+
+                                        <span class="text-danger">@ViewBag.Message</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <button id="btnLogin" type="submit" class="btn btn-success">Login</button>
+                                        </div>
+                                        <div class="col-md-6 txtLeft">
+                                                <button id="btnRegister" type="button" class="btn btn-success" ng-click="Register()">Register</button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+

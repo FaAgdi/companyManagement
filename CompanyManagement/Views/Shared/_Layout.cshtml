@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="~/Content/ui-grid.min.css" rel="stylesheet" />
+
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body ng-app="App">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Nom d'application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Ajax.ActionLink("Employee", "Index", "Employee", new AjaxOptions { UpdateTargetId = "result" })</li>
+                    <li>@Ajax.ActionLink("Company", "Index", "Company", new AjaxOptions { UpdateTargetId = "result" })</li>
+                    <li>@Ajax.ActionLink("À propos de", "About", "Home", new AjaxOptions { UpdateTargetId = "result" })</li>
+                    <li>@Ajax.ActionLink("Contact", "Contact", "Home", new AjaxOptions { UpdateTargetId = "result" })</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div id="result" >@RenderBody() </div>
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mon application ASP.NET</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+
+
+    <script src="~/Scripts/Model/App.js"></script>
+    <script src="~/Scripts/ui-grid.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+
+    <script src="~/Scripts/Controllers/employee.controller.js"></script>
+    <script src="~/Scripts/Services/employee.service.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

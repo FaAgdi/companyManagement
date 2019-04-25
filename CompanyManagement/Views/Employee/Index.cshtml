@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div ng-controller="EmployeeController">
+    <h2>Employee page ..</h2>
+    <button ng-click="msg()">Click here</button>
+    <table style="border:2px;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Tel</th>
+                <th>Birthday</th>
+                <th>Company</th>
+                <th>Categorie</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="e in employees track by $index">
+                <td>{{e.nameEmployee}}</td>
+                <td>{{e.address}}</td>
+                <td>{{e.tel}}</td>
+                <td>{{e.birthday}}</td>
+                <td>{{e.Company.nameCompany}}</td>
+                <td>{{e.Categorie.nameCategorie}}</td>
+                <td>{{e.salary}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
