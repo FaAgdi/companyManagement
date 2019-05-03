@@ -4,42 +4,96 @@
     Layout = "~/Views/Shared/_BlankLayout.cshtml";
 }
 
-@using (Html.BeginForm())
-{
-    <div class="container" ng-controller="LoginController">
-        <div class="d-flex justify-content-center h-100">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Sign In</h3>
-                </div>
-                <div class="card-body">
+<div class="parent">
+    <div ng-controller="LoginController">
+        <div class="row text-center">
+            <div class="col-md-4 Conteneur">
+                <div class="LoginTitle"><h3>Sign In</h3></div>
+                @using (Html.BeginForm())
+                {
                     <form name="loginForm" ng-submit="Login()" novalidate>
-                        <div class="input-group form-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail" } })
+                        <div class="form-group">
+                            <div class="input-group  col-md-10 col-md-offset-1">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                         </div>
-                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-
-                        <div class="input-group form-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Password" } })
+                        <div class="form-group">
+                            <div class="input-group col-md-10 col-md-offset-1">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Password" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                            <span class="text-danger">@ViewBag.Message</span>
                         </div>
-                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                        <span class="text-danger">@ViewBag.Message</span>
                         <div class="form-group">
                             <input type="submit" value="Login" class="btn float-right login_btn">
                         </div>
                     </form>
-                </div>
-                <div class="card-footer">
-                    <div class="d-flex justify-content-center">
-                        <a href="#">Register</a>
-                    </div>
+                }
+                <div class="d-flex justify-content-center">
+                    <a href="#">Register</a>
                 </div>
             </div>
         </div>
     </div>
-}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @*@using (Html.BeginForm())
     {
         <div ng-controller="LoginController">

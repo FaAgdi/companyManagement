@@ -29,7 +29,7 @@ namespace CompanyManagement.Controllers
             if (result == "1")
             {
                 Session["LoginID"] = model.email;
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             else if (result == "0")
             {
@@ -41,6 +41,11 @@ namespace CompanyManagement.Controllers
                 return View(model);
             }
 
+        }
+        public ActionResult Logout()
+        {
+                Session["LoginID"] = "";
+                return RedirectToAction("Login","Home");
         }
         public ActionResult About()
         {

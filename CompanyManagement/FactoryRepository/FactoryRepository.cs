@@ -25,6 +25,21 @@ namespace CompanyManagement.FactoryRepository
         {
             return new EmployeeRepository();
         }
-
+        public static IEmployeeRepository UpdateEmployee()
+        {
+            return new EmployeeRepository();
+        }
+        public static IEmployeeRepository DeleteEmployee()
+        {
+            return new EmployeeRepository();
+        }
+        public static ICompanyRepository GetCompanies()
+        {
+            return new CompanyRepository();
+        }
+        public static ICategoryRepository GetCategories()
+        {
+            return new CategoryRepository();
+        }
     }
 }

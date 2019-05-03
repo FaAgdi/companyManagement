@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f9158c838cab478995a388da04faebfc" Name="Diagram1">
-        <EntityTypeShape EntityType="CompanyManagementModel.category" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CompanyManagementModel.company" Width="1.5" PointX="1" PointY="4.25" IsExpanded="true" />
+      <Diagram DiagramId="4453b7bdc3e944ba8ccb0506de95487a" Name="Diagram1">
+        <EntityTypeShape EntityType="CompanyManagementModel.category" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.company" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="CompanyManagementModel.employee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CompanyManagementModel.history" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CompanyManagementModel.user" Width="1.5" PointX="7.875" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.history" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.user" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="CompanyManagementModel.FK__employee__idCate__15502E78" ManuallyRouted="false" />
-        <AssociationConnector Association="CompanyManagementModel.FK__employee__idCopm__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyManagementModel.FK_employee_company" ManuallyRouted="false" />
         <AssociationConnector Association="CompanyManagementModel.FK__history__idEmplo__1ED998B2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

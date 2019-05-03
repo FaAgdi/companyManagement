@@ -32,6 +32,7 @@ namespace CompanyManagement.Models
         public DbSet<company> company { get; set; }
         public DbSet<employee> employee { get; set; }
         public DbSet<history> history { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<user> user { get; set; }
     
         public virtual int Increase(Nullable<decimal> inc, Nullable<int> id)

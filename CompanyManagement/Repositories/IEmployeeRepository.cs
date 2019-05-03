@@ -10,6 +10,9 @@ namespace CompanyManagement.Repositories
 {
     public interface IEmployeeRepository
     {
-        List<employee> GetEmployees();
+        List<EmployeeViewModel> GetEmployees();
+        string AddEmployee(EmployeeViewModel emp);
+        string UpdateEmployee(EmployeeViewModel emp);
+        string DeleteEmployee(EmployeeViewModel emp);
     }
 }

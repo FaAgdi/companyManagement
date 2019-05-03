@@ -12,16 +12,12 @@ namespace CompanyManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class company
+    public partial class sysdiagrams
     {
-        public company()
-        {
-            this.employee = new HashSet<employee>();
-        }
-    
-        public int idCompany { get; set; }
-        public string nameCompany { get; set; }
-    
-        public virtual ICollection<employee> employee { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

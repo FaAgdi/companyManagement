@@ -1,0 +1,11 @@
+﻿.spanError {
+    color: red;
+}
+
+.BackEndError {
+    color: red;
+}
+
+.input-group {
+    display: block !important;
+}

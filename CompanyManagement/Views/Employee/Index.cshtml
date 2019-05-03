@@ -2,32 +2,193 @@
 @{
     ViewBag.Title = "Index";
 }
-<div ng-controller="EmployeeController">
-    <h2>Employee page ..</h2>
-    <button ng-click="msg()">Click here</button>
-    <table style="border:2px;">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Tel</th>
-                <th>Birthday</th>
-                <th>Company</th>
-                <th>Categorie</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="e in employees track by $index">
-                <td>{{e.nameEmployee}}</td>
-                <td>{{e.address}}</td>
-                <td>{{e.tel}}</td>
-                <td>{{e.birthday}}</td>
-                <td>{{e.Company.nameCompany}}</td>
-                <td>{{e.Categorie.nameCategorie}}</td>
-                <td>{{e.salary}}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="row text-center">
+    <div class="col-md-12">
+        <h1>Employees</h1>
+    </div>
 </div>
+<br />
+<br />
+<div ng-controller="EmployeeController">
+    <div class="row">
+        <div class="col-md-6">
+            <input type='text' ng-model='Text' ng-change="filter()" class="form-control" placeholder="Search">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-8">
+            <button class="btn btn-primary pull-right" ng-click="add()">Add new</button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div ui-grid="gridOptions" class="grid" ui-grid-pagination>
 
+            </div>
+        </div>
+    </div>
+
+
+    @* Employee Popup*@
+
+    <div class="modal fade" id="EmpPopup">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="col-md-4 col-md-offset-4 text-center">{{flag}}</h2>
+                </div>
+                <form ng-submit="save(employee)" name="frm" class="form-horizontal" novalidate>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="code" class="control-label">Code :</label>
+                                    <input class="form-control" type="text" ng-model="employee.codeEmployee" name='code' required />
+                                    <span class="spanError" ng-show="frm.code.$touched && frm.code.$invalid || frm.$submitted">
+                                        <span ng-show="frm.code.$error.required">code is required</span>
+                                    </span>
+                                    <span class="BackEndError">
+                                        <span>{{NewErrors.codeEmployee.errors[0].ErrorMessage}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="nameEmp" class="control-label">Full name :</label>
+                                    <input class="form-control" type="text" ng-model="employee.nameEmployee" name='nameEmp' required />
+                                    <span class="spanError" ng-show="frm.nameEmp.$touched && frm.nameEmp.$invalid || frm.$submitted">
+                                        <span ng-show="frm.nameEmp.$error.required">Name is required</span>
+                                    </span>
+                                    <span class="BackEndError">
+                                        <span>{{NewErrors.nameEmployee.errors[0].ErrorMessage}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="birthday" class="control-label">Birthday :</label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" ng-model="employee.birthday" name="birthday" placeholder="dd/mm/yyyy" uib-datepicker-popup="{{format}}" is-open="popup.opened" show-button-bar="false" datepicker-options="dateOptions" close-text="Close" required />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                    <span class="spanError" ng-show="(frm.birthday.$touched && frm.birthday.$invalid || frm.$submitted)">
+                                        <span ng-show="frm.birthday.$error.required">Birthday is required</span>
+                                    </span>
+                                    <span class="BackEndError">
+                                        <span>{{NewErrors.birthday.errors[0].ErrorMessage}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="address" class="control-label">Address :</label>
+                                    <input class="form-control" type="text" ng-model="employee.address" name='address' />
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="phone" class="control-label">Phone :</label>
+                                    <input class="form-control" type="text" ng-model="employee.tel" name='phone' required />
+                                    <span class="spanError" ng-show="frm.phone.$touched && frm.phone.$invalid || frm.$submitted">
+                                        <span ng-show="frm.phone.$error.required">Phone is required</span>
+                                    </span>
+                                    <span class="BackEndError">
+                                        <span>{{NewErrors.tel.errors[0].ErrorMessage}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="email" class="control-label">E-mail :</label>
+                                    <input class="form-control" type="text" ng-model="employee.email" name='email' required />
+                                    <span class="spanError" ng-show="frm.email.$touched && frm.email.$invalid || frm.$submitted">
+                                        <span ng-show="frm.email.$error.required">Email is required</span>
+                                    </span>
+                                    <span class="BackEndError">
+                                        <span>{{NewErrors.email.errors[0].ErrorMessage}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="company" class="control-label">Company :</label>
+                                    <select class="form-control" ng-model="employee.company.idCompany" name="company" ng-options="c.idCompany as c.nameCompany for c in Listcompanies" required></select>
+                                    <span class="spanError" ng-show="frm.company.$touched && frm.company.$invalid || frm.$submitted">
+                                        <span ng-show="frm.company.$error.required">Company is required</span>
+                                    </span>
+                                    <span class="BackEndError">
+                                        <span>{{NewErrors.company.errors[0].ErrorMessage}}</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="category" class="control-label">Category :</label>
+                                    <select class="form-control" ng-model="employee.category.idCategory" name="category" ng-options="c.idCategory as c.nameCategory for c in Listcategories" required></select>
+                                    <span class="spanError" ng-show="frm.category.$touched && frm.category.$invalid || frm.$submitted">
+                                        <span ng-show="frm.category.$error.required">Category is required</span>
+                                    </span>
+                                    <span class="BackEndError">
+                                        <span>{{NewErrors.category.errors[0].ErrorMessage}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12 col-md-offset-1">
+                                <div class="form-group">
+                                    <label for="salary" class="control-label">Salary :</label>
+                                    <input class="form-control" type="text" ng-model="employee.salary" name='salary' required />
+                                    <span class="spanError" ng-show="frm.salary.$touched && frm.salary.$invalid || frm.$submitted">
+                                        <span ng-show="frm.salary.$error.required">Salary is required</span>
+                                    </span>
+                                    <span class="BackEndError">
+                                        <span>{{NewErrors.salary.errors[0].ErrorMessage}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-primary" type="submit" value="Save">
+                        <input class="btn btn-warning" type="button" ng-click="cancel()" value="Cancel">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    @* Delete popup*@
+
+    <div class="modal fade" id="RemovePopup">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="col-md-4 col-md-offset-4 text-center">Remove</h3>
+                </div>
+                <div class="modal-body">
+                    <span>Are you sure you want to remove {{employee.nameEmployee}}</span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="delete(employee)">Remove</button>
+                    <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
     <link href="~/Content/ui-grid.min.css" rel="stylesheet" />
+    <link href="~/Content/custom_global.css" rel="stylesheet" />
 
     <title>@ViewBag.Title - Mon application ASP.NET</title>
     @Styles.Render("~/Content/css")
@@ -24,16 +25,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Ajax.ActionLink("Employee", "Index", "Employee", new AjaxOptions { UpdateTargetId = "result" })</li>
-                    <li>@Ajax.ActionLink("Company", "Index", "Company", new AjaxOptions { UpdateTargetId = "result" })</li>
-                    <li>@Ajax.ActionLink("À propos de", "About", "Home", new AjaxOptions { UpdateTargetId = "result" })</li>
-                    <li>@Ajax.ActionLink("Contact", "Contact", "Home", new AjaxOptions { UpdateTargetId = "result" })</li>
+                    @*<li>@Ajax.ActionLink("Employee", "Index", "Employee", new AjaxOptions { UpdateTargetId = "result" })</li>
+            <li>@Ajax.ActionLink("Company", "Index", "Company", new AjaxOptions { UpdateTargetId = "result" })</li>
+            <li>@Ajax.ActionLink("À propos de", "About", "Home", new AjaxOptions { UpdateTargetId = "result" })</li>
+            <li>@Ajax.ActionLink("Contact", "Contact", "Home", new AjaxOptions { UpdateTargetId = "result" })</li>*@
+                    <li> @Html.ActionLink("Employee", "Index", "Employee")</li>
+                    <li> @Html.ActionLink("Company", "Index", "Company")</li>
                 </ul>
+                @*@Html.Partial("Logout")*@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        <div id="result" >@RenderBody() </div>
+    <div class="container">
+        <div @*id="result"*@>@RenderBody() </div>
 
         <hr />
         <footer>
@@ -48,11 +52,16 @@
 
     <script src="~/Scripts/Model/App.js"></script>
     <script src="~/Scripts/ui-grid.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 
 
     <script src="~/Scripts/Controllers/employee.controller.js"></script>
+    <script src="~/Scripts/Controllers/company.controller.js"></script>
+    <script src="~/Scripts/Controllers/category.controller.js"></script>
+
     <script src="~/Scripts/Services/employee.service.js"></script>
+    <script src="~/Scripts/Services/company.service.js"></script>
+    <script src="~/Scripts/Services/category.service.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

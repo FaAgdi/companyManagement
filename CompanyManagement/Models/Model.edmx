@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CompanyManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CompanyManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="idCategory" />
@@ -16,9 +16,9 @@
         </EntityType>
         <EntityType Name="company">
           <Key>
-            <PropertyRef Name="idCopmany" />
+            <PropertyRef Name="idCompany" />
           </Key>
-          <Property Name="idCopmany" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCompany" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nameCompany" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="employee">
@@ -26,14 +26,15 @@
             <PropertyRef Name="idEmployee" />
           </Key>
           <Property Name="idEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nameEmployee" Type="varchar" MaxLength="100" />
+          <Property Name="nameEmployee" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="250" />
-          <Property Name="tel" Type="varchar" MaxLength="20" />
-          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="idCompany" Type="int" />
           <Property Name="idCategory" Type="int" />
-          <Property Name="salary" Type="money" />
+          <Property Name="salary" Type="money" Nullable="false" />
           <Property Name="birthday" Type="date" />
+          <Property Name="codeEmployee" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="history">
           <Key>
@@ -43,6 +44,16 @@
           <Property Name="idEmployee" Type="int" />
           <Property Name="newSalary" Type="money" />
           <Property Name="dateUpdate" Type="date" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -65,18 +76,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__employee__idCopm__145C0A3F">
-          <End Role="company" Type="Self.company" Multiplicity="0..1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="company">
-              <PropertyRef Name="idCopmany" />
-            </Principal>
-            <Dependent Role="employee">
-              <PropertyRef Name="idCompany" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__history__idEmplo__1ED998B2">
           <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
           <End Role="history" Type="Self.history" Multiplicity="*" />
@@ -86,6 +85,18 @@
             </Principal>
             <Dependent Role="history">
               <PropertyRef Name="idEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_company">
+          <End Role="company" Type="Self.company" Multiplicity="0..1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="idCompany" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="idCompany" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -104,21 +115,23 @@
           <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="history" EntityType="Self.history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__employee__idCate__15502E78" Association="Self.FK__employee__idCate__15502E78">
             <End Role="category" EntitySet="category" />
-            <End Role="employee" EntitySet="employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK__employee__idCopm__145C0A3F" Association="Self.FK__employee__idCopm__145C0A3F">
-            <End Role="company" EntitySet="company" />
             <End Role="employee" EntitySet="employee" />
           </AssociationSet>
           <AssociationSet Name="FK__history__idEmplo__1ED998B2" Association="Self.FK__history__idEmplo__1ED998B2">
             <End Role="employee" EntitySet="employee" />
             <End Role="history" EntitySet="history" />
           </AssociationSet>
+          <AssociationSet Name="FK_employee_company" Association="Self.FK_employee_company">
+            <End Role="company" EntitySet="company" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CompanyManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -134,27 +147,28 @@
         </EntityType>
         <EntityType Name="company">
           <Key>
-            <PropertyRef Name="idCopmany" />
+            <PropertyRef Name="idCompany" />
           </Key>
-          <Property Name="idCopmany" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCompany" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nameCompany" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="employee" Relationship="Self.FK__employee__idCopm__145C0A3F" FromRole="company" ToRole="employee" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_employee_company" FromRole="company" ToRole="employee" />
         </EntityType>
         <EntityType Name="employee">
           <Key>
             <PropertyRef Name="idEmployee" />
           </Key>
           <Property Name="idEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nameEmployee" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nameEmployee" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idCompany" Type="Int32" />
           <Property Name="idCategory" Type="Int32" />
-          <Property Name="salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="codeEmployee" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="category" Relationship="Self.FK__employee__idCate__15502E78" FromRole="employee" ToRole="category" />
-          <NavigationProperty Name="company" Relationship="Self.FK__employee__idCopm__145C0A3F" FromRole="employee" ToRole="company" />
+          <NavigationProperty Name="company" Relationship="Self.FK_employee_company" FromRole="employee" ToRole="company" />
           <NavigationProperty Name="history" Relationship="Self.FK__history__idEmplo__1ED998B2" FromRole="employee" ToRole="history" />
         </EntityType>
         <EntityType Name="history">
@@ -166,6 +180,16 @@
           <Property Name="newSalary" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="dateUpdate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="employee" Relationship="Self.FK__history__idEmplo__1ED998B2" FromRole="history" ToRole="employee" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -188,12 +212,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__employee__idCopm__145C0A3F">
+        <Association Name="FK_employee_company">
           <End Role="company" Type="Self.company" Multiplicity="0..1" />
           <End Role="employee" Type="Self.employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="company">
-              <PropertyRef Name="idCopmany" />
+              <PropertyRef Name="idCompany" />
             </Principal>
             <Dependent Role="employee">
               <PropertyRef Name="idCompany" />
@@ -217,12 +241,13 @@
           <EntitySet Name="company" EntityType="Self.company" />
           <EntitySet Name="employee" EntityType="Self.employee" />
           <EntitySet Name="history" EntityType="Self.history" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="user" EntityType="Self.user" />
           <AssociationSet Name="FK__employee__idCate__15502E78" Association="Self.FK__employee__idCate__15502E78">
             <End Role="category" EntitySet="category" />
             <End Role="employee" EntitySet="employee" />
           </AssociationSet>
-          <AssociationSet Name="FK__employee__idCopm__145C0A3F" Association="Self.FK__employee__idCopm__145C0A3F">
+          <AssociationSet Name="FK_employee_company" Association="Self.FK_employee_company">
             <End Role="company" EntitySet="company" />
             <End Role="employee" EntitySet="employee" />
           </AssociationSet>
@@ -254,7 +279,7 @@
           <EntitySetMapping Name="company">
             <EntityTypeMapping TypeName="CompanyManagementModel.company">
               <MappingFragment StoreEntitySet="company">
-                <ScalarProperty Name="idCopmany" ColumnName="idCopmany" />
+                <ScalarProperty Name="idCompany" ColumnName="idCompany" />
                 <ScalarProperty Name="nameCompany" ColumnName="nameCompany" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -271,6 +296,7 @@
                 <ScalarProperty Name="idCategory" ColumnName="idCategory" />
                 <ScalarProperty Name="salary" ColumnName="salary" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="codeEmployee" ColumnName="codeEmployee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -281,6 +307,17 @@
                 <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
                 <ScalarProperty Name="newSalary" ColumnName="newSalary" />
                 <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CompanyManagementModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

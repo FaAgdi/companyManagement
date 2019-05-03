@@ -8,23 +8,23 @@ using CompanyManagement.Models;
 
 namespace CompanyManagement.Controllers
 {
-    public class CompanyController : Controller
+    public class CategoryController : Controller
     {
-        // GET: Company
+        // GET: Category
         public ActionResult Index()
         {
             return View();
         }
-        public JsonResult GetCompanies()
+        public JsonResult GetCategories()
         {
             try
             {
-                CompanyBLL Complist = new CompanyBLL();
-                List<company> list = new List<company>();
-                list = Complist.GetCompanies().ToList();
+                CategoryBLL Complist = new CategoryBLL();
+                List<category> list = new List<category>();
+                list = Complist.GetCategories().ToList();
                 var ListReturn = list.Select(x => new {
-                    x.idCompany,
-                    x.nameCompany
+                    x.idCategory,
+                    x.nameCategory
                 });
                 return Json(ListReturn, JsonRequestBehavior.AllowGet);
             }

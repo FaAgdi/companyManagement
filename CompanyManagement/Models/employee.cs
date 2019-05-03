@@ -26,8 +26,9 @@ namespace CompanyManagement.Models
         public string email { get; set; }
         public Nullable<int> idCompany { get; set; }
         public Nullable<int> idCategory { get; set; }
-        public Nullable<decimal> salary { get; set; }
+        public decimal salary { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
+        public string codeEmployee { get; set; }
     
         public virtual category category { get; set; }
         public virtual company company { get; set; }
