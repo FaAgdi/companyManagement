@@ -15,7 +15,7 @@ namespace CompanyManagement.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return View();
+            return PartialView();
         }
         public JsonResult GetEmployees()
         {

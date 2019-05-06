@@ -1,5 +1,6 @@
 ﻿angular.module('App')
     .controller('EmployeeController', ['$scope', '$filter', 'EmployeeService', '$controller', 'uibDateParser', function ($scope, $filter, EmployeeService, $controller, uibDateParser) {
+
         $controller('CompanyController', { $scope: $scope })
         $controller('CategoryController', { $scope: $scope })
         $scope.employees = [];

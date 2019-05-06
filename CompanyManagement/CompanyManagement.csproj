@@ -243,6 +243,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Controllers\category.controller.js" />
     <Content Include="Scripts\Controllers\company.controller.js" />
+    <Content Include="Scripts\Controllers\container.controller.js" />
     <Content Include="Scripts\Controllers\employee.controller.js" />
     <Content Include="Scripts\Controllers\login.controller.js" />
     <Content Include="Scripts\errors.json" />
@@ -1037,6 +1038,7 @@
     <Content Include="Views\Shared\_BlankLayout.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Logout.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

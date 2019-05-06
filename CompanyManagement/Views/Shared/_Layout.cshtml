@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body ng-app="App">
+<body ng-app="App" ng-controller="LayoutController">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -25,35 +25,41 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Ajax.ActionLink("Employee", "Index", "Employee", new AjaxOptions { UpdateTargetId = "result" })</li>
-            <li>@Ajax.ActionLink("Company", "Index", "Company", new AjaxOptions { UpdateTargetId = "result" })</li>
-            <li>@Ajax.ActionLink("À propos de", "About", "Home", new AjaxOptions { UpdateTargetId = "result" })</li>
-            <li>@Ajax.ActionLink("Contact", "Contact", "Home", new AjaxOptions { UpdateTargetId = "result" })</li>*@
-                    <li> @Html.ActionLink("Employee", "Index", "Employee")</li>
-                    <li> @Html.ActionLink("Company", "Index", "Company")</li>
+                    <li>
+                        <a ng-click="PartialView('/Home/Index')">Home</a>
+                    </li>
+                    <li>
+                        <a ng-click="PartialView('/Employee/Index')">Employee</a>
+                    </li>
+
                 </ul>
                 @*@Html.Partial("Logout")*@
             </div>
         </div>
     </div>
     <div class="container">
-        <div @*id="result"*@>@RenderBody() </div>
+        <div id="result">@RenderBody() </div>
 
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Mon application ASP.NET</p>
         </footer>
     </div>
-    <script src="~/Scripts/angular.js"></script>
+
     <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+
 
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
 
 
     <script src="~/Scripts/Model/App.js"></script>
-    <script src="~/Scripts/ui-grid.min.js"></script>
-    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 
+    <script src="~/Scripts/ui-grid.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+
+    <script src="~/Scripts/Controllers/container.controller.js"></script>
 
     <script src="~/Scripts/Controllers/employee.controller.js"></script>
     <script src="~/Scripts/Controllers/company.controller.js"></script>
@@ -66,5 +72,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
 </body>
 </html>

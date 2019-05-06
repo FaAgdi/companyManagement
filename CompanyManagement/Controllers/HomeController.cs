@@ -12,9 +12,13 @@ namespace CompanyManagement.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Home()
         {
             return View();
+        }
+        public ActionResult Index()
+        {
+            return PartialView();
         }
         public ActionResult Login()
         {
@@ -29,7 +33,7 @@ namespace CompanyManagement.Controllers
             if (result == "1")
             {
                 Session["LoginID"] = model.email;
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Home","Home");
             }
             else if (result == "0")
             {
