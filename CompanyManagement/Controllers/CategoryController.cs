@@ -10,10 +10,14 @@ namespace CompanyManagement.Controllers
 {
     public class CategoryController : Controller
     {
-        // GET: Category
+        // GET: Category.
         public ActionResult Index()
         {
-            return PartialView();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return View();
         }
         public JsonResult GetCategories()
         {

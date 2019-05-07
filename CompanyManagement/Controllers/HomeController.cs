@@ -18,7 +18,11 @@ namespace CompanyManagement.Controllers
         }
         public ActionResult Index()
         {
-            return PartialView();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return View();
         }
         public ActionResult Login()
         {

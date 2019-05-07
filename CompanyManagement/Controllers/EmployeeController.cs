@@ -15,7 +15,14 @@ namespace CompanyManagement.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return PartialView();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+
+            return View();
+
+
         }
         public JsonResult GetEmployees()
         {
@@ -24,7 +31,8 @@ namespace CompanyManagement.Controllers
                 EmloyeeBLL Emplist = new EmloyeeBLL();
                 List<EmployeeViewModel> list = new List<EmployeeViewModel>();
                 list = Emplist.GetEmployees().ToList();
-                var ListReturn = list.Select(x => new {
+                var ListReturn = list.Select(x => new
+                {
                     x.nameEmployee,
                     x.codeEmployee,
                     x.address,
@@ -71,9 +79,9 @@ namespace CompanyManagement.Controllers
             {
                 success = false,
                 errors = ModelState.Keys
-                                    .Select(key => new { key = key, errors = ModelState[key].Errors})
+                                    .Select(key => new { key = key, errors = ModelState[key].Errors })
                                     .ToList()
-                            
+
             });
         }
         public JsonResult UpdateEmployee(EmployeeViewModel emp)
@@ -125,7 +133,7 @@ namespace CompanyManagement.Controllers
             }
             catch
             {
-                  return Json("Error", JsonRequestBehavior.AllowGet);
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
         }
     }

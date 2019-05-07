@@ -3,10 +3,11 @@
         return {
             restrict: 'E',
             scope: {
-                url : '='
+                url: '=',
+                id: '='
             },
             link: function (scope, element, attrs) {
-                
+
                 function getPartialView() {
                     var response = $http({
                         method: 'Get',
@@ -19,11 +20,12 @@
 
                 element.bind('click', function () {
                     getPartialView().then(function (response) {
-                        angular.element(document.getElementById('result')).empty();
-                        angular.element(document.getElementById('result')).append($compile(response.data)(scope));
-
+                        angular.element(document.getElementById(scope.id)).empty();
+                        angular.element(document.getElementById(scope.id)).append($compile(response.data)(scope));
+                        history.pushState({}, null, scope.url);
                     })
                 });
+
             },
         }
 

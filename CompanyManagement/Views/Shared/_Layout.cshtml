@@ -12,7 +12,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body ng-app="App" ng-controller="LayoutController">
+<body ng-app="App">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -21,28 +21,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nom d'application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Nom d'application", "Home", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li style="color:white;">
-                        <a> <sa-nav url="'/Employee/Index'">Employee</sa-nav></a>
+                    <li>
+                        <a> <sa-nav url="'/Home/Index'" id="'result'">Home</sa-nav></a>
                     </li>
-                    <li style="color:white;">
-                        <a> <sa-nav url="'/Company/Index'">Company</sa-nav></a>
+                    <li>
+                        <a> <sa-nav url="'/Employee/Index'" id="'result'">Employee</sa-nav></a>
                     </li>
-                    @*<li>
-                            <a ng-click="PartialView('/Home/Index')">Home</a>
-                        </li>
-                        <li>
-                            <a ng-click="PartialView('/Employee/Index')">Employee</a>
-                        </li>
-                        <li>
-                            <a ng-click="PartialView('/Company/Index')">Company</a>
-                        </li>
-                        <li>
-                            <a ng-click="PartialView('/Category/Index')">Category</a>
-                        </li>*@
+                    <li>
+                        <a> <sa-nav url="'/Company/Index'" id="'result'">Company</sa-nav></a>
+                    </li>
+                    <li>
+                        <a> <sa-nav url="'/Category/Index'" id="'result'">Category</sa-nav></a>
+                    </li>
+
                 </ul>
                 @*@Html.Partial("Logout")*@
             </div>

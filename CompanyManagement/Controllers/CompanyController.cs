@@ -13,7 +13,11 @@ namespace CompanyManagement.Controllers
         // GET: Company
         public ActionResult Index()
         {
-            return PartialView();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return View();
         }
         public JsonResult GetCompanies()
         {
