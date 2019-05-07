@@ -13,7 +13,7 @@ namespace CompanyManagement.Controllers
         // GET: Category
         public ActionResult Index()
         {
-            return View();
+            return PartialView();
         }
         public JsonResult GetCategories()
         {
