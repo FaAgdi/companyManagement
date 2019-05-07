@@ -246,6 +246,7 @@
     <Content Include="Scripts\Controllers\container.controller.js" />
     <Content Include="Scripts\Controllers\employee.controller.js" />
     <Content Include="Scripts\Controllers\login.controller.js" />
+    <Content Include="Scripts\Directives\sa_nav.directive.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
