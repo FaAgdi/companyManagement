@@ -9,9 +9,6 @@ namespace CompanyManagement.ViewModel
 {
     public class EmployeeViewModel
     {
-
-
-
         [Required(ErrorMessage = "Code Employee is required")]
         public string codeEmployee { get; set; }
         [Required(ErrorMessage = "Full Name is required")]
